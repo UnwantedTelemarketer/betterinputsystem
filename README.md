@@ -8,6 +8,6 @@ To use:
 4. Instead of calling "Input.GetKey" or anything else, call "InputHandler.ActionPressed('name of action')".
 
 
-Todo:
+Todo:  
 -Add controller support (the main reason I like the Godot one so much).  
 -Add an editor so you don't need to add a script to something and use the Unity Inspector.  

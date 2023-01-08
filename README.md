@@ -6,3 +6,8 @@ To use:
 2. Add the "ActionMap" file to anything.
 3. Add keys and give that group a name.
 4. Instead of calling "Input.GetKey" or anything else, call "InputHandler.ActionPressed('name of action')".
+
+
+Todo:
+-Add controller support (the main reason I like the Godot one so much).
+-Add an editor so you don't need to add a script to something and use the Unity Inspector.

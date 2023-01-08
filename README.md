@@ -9,5 +9,5 @@ To use:
 
 
 Todo:
-\n-Add controller support (the main reason I like the Godot one so much).
-\n-Add an editor so you don't need to add a script to something and use the Unity Inspector.
+/n-Add controller support (the main reason I like the Godot one so much).
+/n-Add an editor so you don't need to add a script to something and use the Unity Inspector.

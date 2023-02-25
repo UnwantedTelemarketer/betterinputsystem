@@ -1,16 +1,49 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEditor;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
-public class Actions : MonoBehaviour
+public class Actions : EditorWindow
 {
 
     public ActionMap[] actions;
 
-    void Start()
+    [MenuItem("Input Handler/Action Editor")]
+    public static void ShowWindow()
     {
-        InputHandler.AddActions(actions);
+        GetWindow<Actions>("Action Editor");
+    }
 
-        //Comment this Destroy out if you want to edit it midgame I guess?.
-        Destroy(this);
+    void OnGUI()
+    {
+        ScriptableObject target = this;
+        SerializedObject so = new SerializedObject(target);
+        SerializedProperty actionsList = so.FindProperty("actions");
+
+        EditorGUILayout.PropertyField(actionsList, true);
+        so.ApplyModifiedProperties();
+
+        if(GUILayout.Button("Update Actions"))
+        {
+            UpdateActions();
+        }
+    }
+
+    void UpdateActions()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath
+                     + "/savedActions");
+        bf.Serialize(file, actions);
+        file.Close();
+
+        GameObject prevObj = GameObject.Find("InputInjector");
+
+        if (prevObj != null) { return; }
+
+        GameObject inj = new GameObject();
+        inj.AddComponent<InputInjector>();
+        inj.name = "InputInjector";
     }
 }
